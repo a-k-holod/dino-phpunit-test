@@ -13,20 +13,29 @@ class DinosaurTest extends TestCase
     $dino = new Dinosaur(
       name: "Dinus",
       genus: "Tyrannosaurus",
-      length: 10,
+      length: 15,
       enclosure: 'Paddock A'
-    );
-
-    self::assertGreaterThan(
-      $dino->getLength(),
-      10,
-      'Dino must be bigger than 10 meters'
     );
 
     self::assertSame('Dinus', $dino->getName());
     self::assertSame('Tyrannosaurus', $dino->getGenus());
-    self::assertSame(10, $dino->getLength());
+    self::assertSame(15, $dino->getLength());
     self::assertSame('Paddock A', $dino->getEnclosure());
   }
 
+  /**
+   * @dataProvider sizeDescriptionProvider
+   */
+  public function testDinosaurHasCorrectSizeDescriptionFromLength(int $length, string $expectedSize): void
+  {
+    $dino = new Dinosaur(name: 'Big eaty', length: $length);
+    self::assertSame($expectedSize, $dino->getSizeDescription(), );
+  }
+
+  public function sizeDescriptionProvider(): \Generator
+  {
+    yield '10 Meter Large Dino' => [10, 'Large'];
+    yield '5 Meter Medium Dino' =>[5, 'Medium'];
+    yield '4 Meter Small Dino' =>[4, 'Small'];
+  }
 }
