@@ -57,3 +57,6 @@ And as always, thanks so much for your support and letting
 us do what we love!
 
 <3 Your friends at SymfonyCasts
+
+
+vendor/bin/phpunit --testdox --filter "Hungry Dino is accepting visitors"
